@@ -87,7 +87,7 @@ func ParseCrontab(reader io.Reader) (*Crontab, error) {
 			}
 
 			if envKey == "SHELL" {
-				logrus.Infof("processes will be spawned using shell: %s", envVal)
+				logrus.Debugf("processes will be spawned using shell: %s", envVal)
 				shell = envVal
 			}
 

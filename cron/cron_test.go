@@ -79,26 +79,26 @@ var runJobTestCases = []struct {
 	{
 		"true", true, &basicContext,
 		[]*logrus.Entry{
-			{Message: "starting", Level: logrus.InfoLevel, Data: noData},
+			{Message: "starting", Level: logrus.DebugLevel, Data: noData},
 		},
 	},
 	{
 		"false", false, &basicContext,
 		[]*logrus.Entry{
-			{Message: "starting", Level: logrus.InfoLevel, Data: noData},
+			{Message: "starting", Level: logrus.DebugLevel, Data: noData},
 		},
 	},
 	{
 		"echo hello", true, &basicContext,
 		[]*logrus.Entry{
-			{Message: "starting", Level: logrus.InfoLevel, Data: noData},
+			{Message: "starting", Level: logrus.DebugLevel, Data: noData},
 			{Message: "hello", Level: logrus.InfoLevel, Data: stdoutData},
 		},
 	},
 	{
 		"echo hello >&2", true, &basicContext,
 		[]*logrus.Entry{
-			{Message: "starting", Level: logrus.InfoLevel, Data: noData},
+			{Message: "starting", Level: logrus.DebugLevel, Data: noData},
 			{Message: "hello", Level: logrus.InfoLevel, Data: stderrData},
 		},
 	},
@@ -109,7 +109,7 @@ var runJobTestCases = []struct {
 			Environ: map[string]string{"FOO": "BAR"},
 		},
 		[]*logrus.Entry{
-			{Message: "starting", Level: logrus.InfoLevel, Data: noData},
+			{Message: "starting", Level: logrus.DebugLevel, Data: noData},
 			{Message: "BAR", Level: logrus.InfoLevel, Data: stdoutData},
 		},
 	},
@@ -120,13 +120,13 @@ var runJobTestCases = []struct {
 			Environ: map[string]string{},
 		},
 		[]*logrus.Entry{
-			{Message: "starting", Level: logrus.InfoLevel, Data: noData},
+			{Message: "starting", Level: logrus.DebugLevel, Data: noData},
 		},
 	},
 	{
 		"echo hello\nsleep 0.1\necho bar >&2", true, &basicContext,
 		[]*logrus.Entry{
-			{Message: "starting", Level: logrus.InfoLevel, Data: noData},
+			{Message: "starting", Level: logrus.DebugLevel, Data: noData},
 			{Message: "hello", Level: logrus.InfoLevel, Data: stdoutData},
 			{Message: "bar", Level: logrus.InfoLevel, Data: stderrData},
 		},
@@ -134,7 +134,7 @@ var runJobTestCases = []struct {
 	{
 		fmt.Sprintf("python -c 'print(\"a\" * %d * 3)'", READ_BUFFER_SIZE), true, &basicContext,
 		[]*logrus.Entry{
-			{Message: "starting", Level: logrus.InfoLevel, Data: noData},
+			{Message: "starting", Level: logrus.DebugLevel, Data: noData},
 			{Message: strings.Repeat("a", READ_BUFFER_SIZE), Level: logrus.InfoLevel, Data: stdoutData},
 			{Message: "last line exceeded buffer size, continuing...", Level: logrus.WarnLevel, Data: stdoutData},
 			{Message: strings.Repeat("a", READ_BUFFER_SIZE), Level: logrus.InfoLevel, Data: stdoutData},

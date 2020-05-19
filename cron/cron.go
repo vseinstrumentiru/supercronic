@@ -64,7 +64,7 @@ func startReaderDrain(wg *sync.WaitGroup, readerLogger *logrus.Entry, reader io.
 }
 
 func runJob(cronCtx *crontab.Context, command string, jobLogger *logrus.Entry) error {
-	jobLogger.Info("starting")
+	jobLogger.Debug("starting")
 
 	cmd := exec.Command(cronCtx.Shell, "-c", command)
 
@@ -211,7 +211,7 @@ func StartJob(wg *sync.WaitGroup, cronCtx *crontab.Context, job *crontab.Job, ex
 		promMetrics.CronsExecCounter.With(jobPromLabels(job)).Inc()
 
 		if err == nil {
-			jobLogger.Info("job succeeded")
+			jobLogger.Debug("job succeeded")
 
 			promMetrics.CronsSuccessCounter.With(jobPromLabels(job)).Inc()
 		} else {

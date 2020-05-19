@@ -111,7 +111,7 @@ func main() {
 	for true {
 		promMetrics.Reset()
 
-		logrus.Infof("read crontab: %s", crontabFileName)
+		logrus.Debug("read crontab: %s", crontabFileName)
 		tab, err := readCrontabAtPath(crontabFileName)
 
 		if err != nil {
@@ -144,17 +144,17 @@ func main() {
 		termSig := <-termChan
 
 		if termSig == syscall.SIGUSR2 {
-			logrus.Infof("received %s, reloading crontab", termSig)
+			logrus.Debugf("received %s, reloading crontab", termSig)
 		} else {
-			logrus.Infof("received %s, shutting down", termSig)
+			logrus.Debugf("received %s, shutting down", termSig)
 		}
 		notifyExit()
 
-		logrus.Info("waiting for jobs to finish")
+		logrus.Debug("waiting for jobs to finish")
 		wg.Wait()
 
 		if termSig != syscall.SIGUSR2 {
-			logrus.Info("exiting")
+			logrus.Debug("exiting")
 			break
 		}
 	}
