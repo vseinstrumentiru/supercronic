@@ -4,6 +4,8 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"github.com/aptible/supercronic/log/format"
+	"github.com/aptible/supercronic/log/formatter"
 	"os"
 	"os/signal"
 	"sync"
@@ -26,6 +28,7 @@ var Usage = func() {
 func main() {
 	debug := flag.Bool("debug", false, "enable debug logging")
 	json := flag.Bool("json", false, "enable JSON logging")
+	plain := flag.Bool("plain", false, "enable plain text logging")
 	test := flag.Bool("test", false, "test crontab (does not run jobs)")
 	prometheusListen := flag.String("prometheus-listen-address", "", "give a valid ip:port address to expose Prometheus metrics at /metrics")
 	splitLogs := flag.Bool("split-logs", false, "split log output into stdout/stderr")
@@ -50,6 +53,8 @@ func main() {
 
 	if *json {
 		logrus.SetFormatter(&logrus.JSONFormatter{})
+	} else if *plain {
+		logrus.SetFormatter(&format.PlainFormatter{})
 	} else {
 		logrus.SetFormatter(&logrus.TextFormatter{FullTimestamp: true})
 	}
