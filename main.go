@@ -4,8 +4,6 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"github.com/aptible/supercronic/log/format"
-	"github.com/aptible/supercronic/log/formatter"
 	"os"
 	"os/signal"
 	"sync"
@@ -14,6 +12,7 @@ import (
 
 	"github.com/aptible/supercronic/cron"
 	"github.com/aptible/supercronic/crontab"
+	"github.com/aptible/supercronic/log/format"
 	"github.com/aptible/supercronic/log/hook"
 	"github.com/aptible/supercronic/prometheus_metrics"
 	"github.com/evalphobia/logrus_sentry"
