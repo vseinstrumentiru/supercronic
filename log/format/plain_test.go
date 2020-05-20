@@ -29,7 +29,7 @@ func TestPlainFormatter_Format(t *testing.T) {
 
 	select {
 	case log := <-defaultWriter.c:
-		assert.Equal(t, "some plain text message", string(log))
+		assert.Equal(t, "some plain text message\n", string(log))
 	case <-time.After(time.Second):
 		t.Fatalf("timed out waiting for out log")
 	}
@@ -38,7 +38,7 @@ func TestPlainFormatter_Format(t *testing.T) {
 
 	select {
 	case log := <-defaultWriter.c:
-		assert.Equal(t, "some plain text message", string(log))
+		assert.Equal(t, "some plain text message\n", string(log))
 	case <-time.After(time.Second):
 		t.Fatalf("timed out waiting for out log")
 	}
@@ -52,7 +52,7 @@ func TestPlainFormatter_Format(t *testing.T) {
 	log.Info(string(b))
 	select {
 	case log := <-defaultWriter.c:
-		assert.Equal(t, `{"first":"val1","second":2,"third":["3.1","3.2"]}`, string(log))
+		assert.Equal(t, `{"first":"val1","second":2,"third":["3.1","3.2"]}`+"\n", string(log))
 	case <-time.After(time.Second):
 		t.Fatalf("timed out waiting for out log")
 	}
