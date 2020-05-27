@@ -3,7 +3,7 @@ SHELL=/bin/bash
 
 .PHONY: deps
 deps:
-	dep ensure -vendor-only
+	go get
 
 .PHONY: build
 build: $(GOFILES)
