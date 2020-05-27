@@ -19,7 +19,6 @@ jobs:
   - stage: test
     script:
     - make fmt
-    - git diff --exit-code
     - make test
   - stage: build
     script:
