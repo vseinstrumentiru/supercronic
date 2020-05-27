@@ -58,7 +58,7 @@ wait_for() {
 }
 
 @test "it runs overlapping jobs" {
-  n="$(SUPERCRONIC_ARGS="-overlapping" run_supercronic "${BATS_TEST_DIRNAME}/timeout.crontab" 5s | grep -iE "starting" | wc -l)"
+  n="$(SUPERCRONIC_ARGS="-overlapping -debug" run_supercronic "${BATS_TEST_DIRNAME}/timeout.crontab" 5s | grep -iE "starting" | wc -l)"
   [[ "$n" -ge 4 ]]
 }
 
@@ -67,7 +67,7 @@ wait_for() {
 }
 
 @test "it supports JSON logging " {
-  SUPERCRONIC_ARGS="-json" run_supercronic "${BATS_TEST_DIRNAME}/noop.crontab" | grep -iE "^{"
+  SUPERCRONIC_ARGS="-json -debug" run_supercronic "${BATS_TEST_DIRNAME}/noop.crontab" | grep -iE "^{"
 }
 
 @test "it waits for jobs to exit before terminating" {
