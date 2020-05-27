@@ -111,7 +111,7 @@ func main() {
 	for true {
 		promMetrics.Reset()
 
-		logrus.Debug("read crontab: %s", crontabFileName)
+		logrus.Debugf("read crontab: %s", crontabFileName)
 		tab, err := readCrontabAtPath(crontabFileName)
 
 		if err != nil {
